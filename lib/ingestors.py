@@ -1,12 +1,9 @@
-# Databricks notebook source
 import pandas as pd
 import requests
 import json
 import gzip
 import os
 import shutil
-
-# COMMAND ----------
 
 class IngestionBronze:
     def __init__(self, api_url, spark, metadata_table):
