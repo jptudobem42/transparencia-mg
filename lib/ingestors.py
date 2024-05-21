@@ -1,4 +1,4 @@
-#%%
+# Databricks notebook source
 import pandas as pd
 import requests
 import json
@@ -6,7 +6,9 @@ import gzip
 import os
 import shutil
 from tqdm import tqdm
-# %%
+
+# COMMAND ----------
+
 class IngestionBronze:
     def __init__(self, api_url, metadata_file='metadata.json'):
         self.api_url = api_url
