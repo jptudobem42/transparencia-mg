@@ -1,0 +1,5 @@
+*.parquet
+*.pkl
+*.csv
+*.json
+*.xls*
