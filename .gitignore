@@ -3,4 +3,4 @@
 *.csv
 *.json
 *.xls*
-.gitkeep
+!/**/.gitkeep
