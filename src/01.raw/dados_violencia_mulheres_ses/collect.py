@@ -18,8 +18,3 @@ metadata_table = f'raw.transparencia_mg.metadata_{area}'
 
 raw = Raw(api_url, spark, metadata_table)
 raw.get_and_save(output_dir)
-
-# COMMAND ----------
-
-df = spark.read.csv(f"/mnt/datalake/transparencia-mg/raw/{area}/data", inferSchema=True, sep=';', header=True)
-df.display()
