@@ -5,7 +5,7 @@ import gzip
 import os
 import shutil
 
-class Raw:
+class Collector:
     def __init__(self, api_url, spark, metadata_table):
         self.api_url = api_url
         self.spark = spark
