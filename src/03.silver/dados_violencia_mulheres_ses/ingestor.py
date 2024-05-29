@@ -1,4 +1,6 @@
 # Databricks notebook source
+!pip install unidecode rapidfuzz --quiet
+
 from pyspark.sql import SparkSession
 
 import os
@@ -17,7 +19,3 @@ silver_table = f"silver.transparencia_mg.{area}"
 
 processors = ProcessSilver(spark, silver_table)
 processors.process_silver(bronze_table)
-
-# COMMAND ----------
-
-spark.read.table(f'silver.transparencia_mg.{area}').display()
