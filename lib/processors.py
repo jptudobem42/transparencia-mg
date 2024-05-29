@@ -75,12 +75,12 @@ class ProcessSilver:
 
         selected_columns = [
             'data_notificacao', 'idade', 'sexo', 'raca_cor', 'cidade_residencia',
-            'local_ocorrencia', 'aconteceu_outras_vezes', 'lesao_autoprovocada',
-            'violencia_fisica', 'violencia_psicologica', 'violencia_sexual',
-            'numero_envolvidos', 'sexo_autor', 'orientacao_sexual',
+            'city_ibge_code', 'local_ocorrencia', 'aconteceu_outras_vezes', 
+            'lesao_autoprovocada', 'violencia_fisica', 'violencia_psicologica', 
+            'violencia_sexual', 'numero_envolvidos', 'sexo_autor', 'orientacao_sexual',
             'identidade_genero', 'estimated_population'
         ]
-        column_renames = {'estimated_population': 'populacao_estimada'}
+        column_renames = {'estimated_population': 'populacao_estimada', 'city_ibge_code': 'cod_ibge_cidade'}
 
         df_final = merged_df[selected_columns].rename(columns=column_renames).dropna()
 
