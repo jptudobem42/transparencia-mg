@@ -1,4 +1,5 @@
 # Databricks notebook source
+!pip install rapidfuzz unidecode
 from pyspark.sql import SparkSession
 
 import os

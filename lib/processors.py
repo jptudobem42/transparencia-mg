@@ -27,16 +27,21 @@ class ProcessSilver:
             df_bronze
             .na.drop(subset=['ID_MN_RESI'])
             .filter(~(col('DT_NASC').isNull() & col('NU_IDADE_N').isNull()))
-            .drop('DT_NASC')
+            .drop(*('DT_NASC', 'CS_SEXO'))
             .fillna('Ignorado')
             .withColumn('NU_IDADE_N', col('NU_IDADE_N').cast(IntegerType()))
             .withColumn('DT_NOTIFIC', to_date(col('DT_NOTIFIC'), 'dd/MM/yyyy'))
+            .filter(
+                (col('LES_AUTOP') != 'Ignorado') &
+                (col('VIOL_FISIC') != 'Ignorado') &
+                (col('VIOL_PSICO') != 'Ignorado') &
+                (col('VIOL_SEXU') != 'Ignorado')
+            )
             .orderBy(col('DT_NOTIFIC').desc())
         )
 
         columns = {'DT_NOTIFIC':'data_notificacao',
                    'NU_IDADE_N':'idade',
-                   'CS_SEXO':'sexo',
                    'CS_RACA': 'raca_cor',
                    'ID_MN_RESI':'cidade_residencia',
                    'LOCAL_OCOR':'local_ocorrencia',
@@ -74,7 +79,7 @@ class ProcessSilver:
         merged_df = pd.merge(silver_df, gold_df_unique, how='left', left_on=['city_match', 'year'], right_on=['city_normalized', 'year'])
 
         selected_columns = [
-            'data_notificacao', 'idade', 'sexo', 'raca_cor', 'cidade_residencia',
+            'data_notificacao', 'idade', 'raca_cor', 'cidade_residencia',
             'city_ibge_code', 'local_ocorrencia', 'aconteceu_outras_vezes', 
             'lesao_autoprovocada', 'violencia_fisica', 'violencia_psicologica', 
             'violencia_sexual', 'numero_envolvidos', 'sexo_autor', 'orientacao_sexual',
@@ -84,10 +89,8 @@ class ProcessSilver:
 
         df_final = merged_df[selected_columns].rename(columns=column_renames).dropna()
 
-        # Convert back to Spark DataFrame
         df_final_spark = self.spark.createDataFrame(df_final)
 
-        # Write the final DataFrame to the silver table
         df_final_spark.write.mode("overwrite").saveAsTable(self.silver_table)
 
     @staticmethod
