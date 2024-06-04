@@ -95,9 +95,9 @@ class ProcessSilver:
 
     @staticmethod
     def normalize_city_name(name):
-        name = unidecode(name)  # Remove acentuação
-        name = name.lower()  # Converte para minúsculas
-        name = name.strip()  # Remove espaços extras
+        name = unidecode(name)
+        name = name.lower()
+        name = name.strip()
         return name
 
     @staticmethod

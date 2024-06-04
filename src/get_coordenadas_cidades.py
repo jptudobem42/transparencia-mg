@@ -8,9 +8,6 @@ import time
 # COMMAND ----------
 
 def get_codigos_ibge():
-    """
-    Obtém os códigos IBGE dos municípios.
-    """
     estado = "MG"
     url_municipios_mg = f"https://servicodados.ibge.gov.br/api/v1/localidades/estados/{estado}/municipios"
     
@@ -25,11 +22,8 @@ def get_codigos_ibge():
         return []
 
 def get_lat_lon(codigos_ibge):
-    """
-    Obtém a latitude e longitude dos municípios usando os códigos IBGE.
-    """
     url_base = "https://servicodados.ibge.gov.br/api/v1/bdg/municipio"
-    file = "/dbfs/mnt/datalake/censo-ibge/data/output/lat_lon_cidades_ibge.csv"
+    file = "/dbfs/mnt/datalake/censo-ibge/data/output/coordenadas_cidades_ibge.csv"
     seconds = 2
 
     with open(file, "w", newline="") as csvfile:
@@ -73,10 +67,10 @@ schema = StructType([ \
     StructField("longitude",DoubleType(),True), \
   ])
 
-df = spark.read.csv("/mnt/datalake/censo-ibge/data/output/lat_lon_cidades_ibge.csv", sep=',', header=True, schema=schema)
+df = spark.read.csv("/mnt/datalake/censo-ibge/data/output/coordenadas_cidades_ibge.csv", sep=',', header=True, schema=schema)
 df.display()
 
 # COMMAND ----------
 
-table_gold = "gold.ibge.lat_lon_cidades_ibge"
+table_gold = "gold.ibge.coordenadas_cidades_mg"
 df.write.mode("overwrite").saveAsTable(table_gold)
