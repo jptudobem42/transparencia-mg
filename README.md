@@ -11,4 +11,4 @@ Repositório destinado a projetos realizados com os dados do **"Portal de Dados 
 | Compras e contratos      | Processos de compras de materiais e serviços realizados pelo Estado e os contratos firmados entre o Estado e terceiros.   | [dados.mg.gov.br/dataset/compras_contratos](<https://dados.mg.gov.br/dataset/compras_contratos>)|
 
 ## Documentação
-[GitHub Pages](<https://jptudobem42.github.io/transparencia-mg>)
+[Medium](<https://medium.com/@jpaulocarneiro/analytical-engineering-end-to-end-2ebbbcb24d1b>)
